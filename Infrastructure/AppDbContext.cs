@@ -20,6 +20,8 @@ namespace Infrastructure
         }
         public DbSet<UserAccount> Users { get; set; }
         public DbSet<EmailVerification> EmailVerifications { get; set; }
+        public DbSet<Product> Products { get; set; }
+        public DbSet<Category> Categories { get; set; }
      
 
 

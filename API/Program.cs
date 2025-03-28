@@ -35,13 +35,13 @@ builder.Services.AddFluentValidationAutoValidation();
 //config api 
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
-    options.UseSqlServer(configuration!.ConnectionStrings.DefaultConnection);
-    //options.UseNpgsql(configuration!.ConnectionStrings.LocalDockerConnection);
+    //options.UseSqlServer(configuration!.ConnectionStrings.DefaultConnection);
+    options.UseNpgsql(configuration!.ConnectionStrings.DefaultConnection);
     options.ConfigureWarnings(warnings =>
             warnings.Ignore(CoreEventId.NavigationBaseIncludeIgnored));
 });
 
-//AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
 builder.Services.AddSwaggerGen
     (
@@ -93,6 +93,8 @@ builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IEmailService, EmailService>();
 builder.Services.AddScoped<IClaimService, ClaimService>();
+builder.Services.AddScoped<ICategoryService, CategoryService>();
+builder.Services.AddScoped<IProductService, ProductService>();
 
 builder.Services.AddFluentValidationAutoValidation().AddValidatorsFromAssemblyContaining<RegisterValidator>();
 

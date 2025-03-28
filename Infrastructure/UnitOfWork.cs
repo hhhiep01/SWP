@@ -16,15 +16,18 @@ namespace Infrastructure
         private AppDbContext _context;
         public IUserAccountRepository UserAccounts { get; }
         public IEmailVerificationRepository EmailVerifications { get; }
-     
-
+        public IProductRepository Products { get; }
+        public ICategoryRepository Categories { get; }
 
         public UnitOfWork(AppDbContext context)
         {
             _context = context;
             UserAccounts = new UserAccountRepository(context);
             EmailVerifications = new EmailVerificationRepository(context);
-          
+            Products = new ProductRepository(context);
+            Categories = new CategoryRepository(context);
+
+
         }
         public async Task SaveChangeAsync()
         {

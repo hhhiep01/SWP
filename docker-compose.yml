@@ -3,11 +3,11 @@ version: '3.9'
 services:
   postgres:
     image: postgres
-    container_name: koidelivery
+    container_name: swp
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: matkhau
-      POSTGRES_DB: koidelivery
+      POSTGRES_DB: swp
     ports:
       - "5432:5432"
     volumes:

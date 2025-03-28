@@ -11,7 +11,9 @@ namespace Application
     {
         public IUserAccountRepository UserAccounts { get; }
         public IEmailVerificationRepository EmailVerifications { get; }
-       
+        public IProductRepository Products { get; }
+        public ICategoryRepository Categories { get; }
+
         public Task SaveChangeAsync();
         Task<T> ExecuteScalarAsync<T>(string sql);
         Task ExecuteRawSqlAsync(string sql);

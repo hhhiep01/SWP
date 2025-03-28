@@ -5,6 +5,9 @@ using Domain.Entity;
 using Application.Response.UserAccount;
 
 using Application.Request.User;
+using Application.Request.Category;
+using Application.Response.Category;
+using Application.Request.Product;
 
 
 namespace Application.MyMapper
@@ -20,6 +23,14 @@ namespace Application.MyMapper
             CreateMap<UserAccount, UserProfileResponse>();
             CreateMap<UserAccount, AccountResponse>();
 
+            //Category
+            CreateMap<AddCategoryRequest, Category>();
+            CreateMap<Category, CategoryResponse>();
+            CreateMap<UpdateCategoryRequest, Category>();
+
+            //Category
+            CreateMap<CreateProductRequest, Product>();
+          
         }
     }
 }
