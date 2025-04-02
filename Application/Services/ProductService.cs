@@ -2,9 +2,12 @@
 using Application.Request.Category;
 using Application.Request.Product;
 using Application.Response;
+using Application.Response.Product;
 using AutoMapper;
+using DocumentFormat.OpenXml.Office2010.Excel;
 using Domain;
 using Domain.Entity;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -40,6 +43,43 @@ namespace Application.Services
             catch (Exception ex)
             {
                 return response.SetBadRequest(ex.Message);
+            }
+        }
+        public async Task<ApiResponse> GetProductListAsync()
+        {
+            ApiResponse response = new ApiResponse();
+            try
+            {
+                var serviceList = await _unitOfWork.Products.GetAllAsync(null, x => x.Include(x => x.Category));
+                var responseList = _mapper.Map<List<ProductResponse>>(serviceList);
+
+                return response.SetOk(responseList);
+            }
+            catch (Exception ex)
+            {
+                return response.SetBadRequest(ex.Message);
+            }
+        }
+        public async Task<ApiResponse> DeleteByIdAsync(int id)
+        {
+
+            try
+            {
+                var product = await _unitOfWork.Products.GetAsync(x => x.Id == id);
+
+                if (product == null)
+                {
+                    return new ApiResponse().SetBadRequest("Can not find product !");
+                }
+
+                await _unitOfWork.Products.RemoveByIdAsync(id);
+
+                await _unitOfWork.SaveChangeAsync();
+                return new ApiResponse().SetOk("Success !");
+            }
+            catch (Exception ex)
+            {
+                return new ApiResponse().SetBadRequest(ex.Message);
             }
         }
     }

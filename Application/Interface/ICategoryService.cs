@@ -14,5 +14,6 @@ namespace Application.Interface
         Task<ApiResponse> RemoveCategoryAsync(int id);
         Task<ApiResponse> GetAllCategoryAsync();
         Task<ApiResponse> UpdateCategoryAsync(UpdateCategoryRequest request);
+        Task<ApiResponse> GetCategoryByIdAsync(int id);
     }
 }

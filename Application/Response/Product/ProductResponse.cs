@@ -1,12 +1,14 @@
-﻿using System;
+﻿using Application.Response.Category;
+using Domain.Entity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Domain.Entity
+namespace Application.Response.Product
 {
-    public class Product: Base
+    public class ProductResponse
     {
         public int Id { get; set; }
 
@@ -19,17 +21,6 @@ namespace Domain.Entity
         public SkinType SkinType { get; set; }
 
         public string ImageURL { get; set; }
-        //
-        public int CategoryId { get; set; }
-        public Category Category { get; set; }
-        public ICollection<CartItem> CartItems { get; set; }
-    }
-    public enum SkinType
-    {
-        Oily,
-        Dry,
-        Combination,
-        Sensitive,
-        Normal
+        public CategoryResponse Category { get; set; }
     }
 }

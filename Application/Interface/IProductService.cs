@@ -11,5 +11,7 @@ namespace Application.Interface
     public interface IProductService
     {
         Task<ApiResponse> AddProductAsync(CreateProductRequest request);
+        Task<ApiResponse> GetProductListAsync();
+        Task<ApiResponse> DeleteByIdAsync(int id);
     }
 }

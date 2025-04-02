@@ -8,6 +8,9 @@ using Application.Request.User;
 using Application.Request.Category;
 using Application.Response.Category;
 using Application.Request.Product;
+using Application.Response.Product;
+using Application.Response.Cart;
+using Application.Response.CartItem;
 
 
 namespace Application.MyMapper
@@ -28,9 +31,21 @@ namespace Application.MyMapper
             CreateMap<Category, CategoryResponse>();
             CreateMap<UpdateCategoryRequest, Category>();
 
-            //Category
+            //Product
             CreateMap<CreateProductRequest, Product>();
-          
+            CreateMap<Product, ProductResponse>()
+                .ForMember(dest => dest.Category, opt => opt.MapFrom(src => src.Category));
+
+            //Cart
+            CreateMap<Cart, CartResponse>()
+                .ForMember(dest => dest.Items, opt => opt.MapFrom(src => src.CartItems));
+
+            //CartItem
+            CreateMap<CartItem, CartItemResponse>()
+                .ForMember(dest => dest.ProductResponse, opt => opt.MapFrom(src => src.Product));
+
+
+
         }
     }
 }

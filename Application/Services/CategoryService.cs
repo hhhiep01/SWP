@@ -42,6 +42,24 @@ namespace Application.Services
                 return response.SetBadRequest(ex.Message);
             }
         }
+        public async Task<ApiResponse> GetCategoryByIdAsync(int id)
+        {   
+            try
+            {
+                ApiResponse response = new ApiResponse();
+                var category = await _unitOfWork.Categories.GetAsync(s => s.Id == id);
+                if (category == null)
+                {
+                    return response.SetNotFound($"Category Id: {id} not found");
+                }
+                var categoriesResponse = _mapper.Map<CategoryResponse>(category);
+                return new ApiResponse().SetOk(categoriesResponse);
+            }
+            catch (Exception ex)
+            {
+                return new ApiResponse().SetBadRequest($"{ex.Message}");
+            }
+        }
         public async Task<ApiResponse> GetAllCategoryAsync()
         {
             try

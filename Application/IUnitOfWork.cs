@@ -13,6 +13,8 @@ namespace Application
         public IEmailVerificationRepository EmailVerifications { get; }
         public IProductRepository Products { get; }
         public ICategoryRepository Categories { get; }
+        public ICartRepository Carts { get; }
+        public ICartItemRepository CartItems { get; set; }
 
         public Task SaveChangeAsync();
         Task<T> ExecuteScalarAsync<T>(string sql);

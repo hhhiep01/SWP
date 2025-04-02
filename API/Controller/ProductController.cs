@@ -21,5 +21,17 @@ namespace API.Controller
             var result = await _service.AddProductAsync(request);
             return result.IsSuccess ? Ok(result) : BadRequest(result);
         }
+        [HttpGet]
+        public async Task<IActionResult> GetAllCategoryAsync()
+        {
+            var result = await _service.GetProductListAsync();
+            return result.IsSuccess ? Ok(result) : BadRequest(result);
+        }
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteByIdAsync(int id)
+        {
+            var result = await _service.DeleteByIdAsync(id);
+            return result.IsSuccess ? Ok(result) : BadRequest(result);
+        }
     }
 }

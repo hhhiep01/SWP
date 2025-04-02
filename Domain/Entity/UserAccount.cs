@@ -22,14 +22,13 @@ namespace Domain.Entity
         //public double? walletAmount { get; set; }
         //
         public List<EmailVerification>? EmailVerifications { get; set; }
-        
+        public Cart? Cart { get; set; }
+
 
     }
     public enum Role
     {
         Customer,
-        SalesStaff,
-        DeliveringStaff,
-        Manager
+        Admin
     }
 }

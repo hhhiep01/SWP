@@ -18,6 +18,8 @@ namespace Infrastructure
         public IEmailVerificationRepository EmailVerifications { get; }
         public IProductRepository Products { get; }
         public ICategoryRepository Categories { get; }
+        public ICartRepository Carts { get; }
+        public ICartItemRepository CartItems { get; set; }
 
         public UnitOfWork(AppDbContext context)
         {
@@ -26,6 +28,8 @@ namespace Infrastructure
             EmailVerifications = new EmailVerificationRepository(context);
             Products = new ProductRepository(context);
             Categories = new CategoryRepository(context);
+            Carts = new CartRepository(context);
+            CartItems = new CartItemRepository(context);
 
 
         }

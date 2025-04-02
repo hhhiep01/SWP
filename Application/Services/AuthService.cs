@@ -62,6 +62,14 @@ namespace Application.Services
                 await _unitOfWork.UserAccounts.AddAsync(user);
                 await _unitOfWork.SaveChangeAsync();
 
+                Cart cart = new Cart
+                {
+                    UserId = user.Id,
+                    CartItems = new List<CartItem>()
+                };
+                await _unitOfWork.Carts.AddAsync(cart);
+                await _unitOfWork.SaveChangeAsync();
+
                 // Generate verification code
                 var verificationCode = GenerateVerificationCode(); // Method to generate the code
                 var emailVerification = new EmailVerification

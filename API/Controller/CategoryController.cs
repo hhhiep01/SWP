@@ -26,13 +26,19 @@ namespace API.Controller
             var result = await _service.GetAllCategoryAsync();
             return result.IsSuccess ? Ok(result) : BadRequest(result);
         }
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetAllCategoryAsync(int id)
+        {
+            var result = await _service.GetCategoryByIdAsync(id);
+            return result.IsSuccess ? Ok(result) : BadRequest(result);
+        }
         [HttpPut]
         public async Task<IActionResult> UpdateCategoryAsync(UpdateCategoryRequest updateCategoryRequest)
         {
             var result = await _service.UpdateCategoryAsync(updateCategoryRequest);
             return result.IsSuccess ? Ok(result) : BadRequest(result);
         }
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteCategoryAsync(int id)
         {
             var result = await _service.RemoveCategoryAsync(id);
