@@ -17,6 +17,9 @@ namespace Infrastructure.Configuration
                 .WithMany(x => x.Products)
                 .HasForeignKey(x => x.CategoryId);
 
+            builder.HasMany(x => x.OrderDetails)
+               .WithOne(x => x.Product)
+               .HasForeignKey(x => x.ProductId);
         }
     }
 }

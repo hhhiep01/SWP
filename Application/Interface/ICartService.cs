@@ -1,4 +1,5 @@
 ﻿using Application.Request.Cart;
+using Application.Request.CartItem;
 using Application.Response;
 using System;
 using System.Collections.Generic;
@@ -12,5 +13,7 @@ namespace Application.Interface
     {
         Task<ApiResponse> AddToCartAsync(AddToCartRequest request);
         Task<ApiResponse> GetCartAsync();
+        Task<ApiResponse> RemoveCartItemAsync(int productId);
+        Task<ApiResponse> UpdateCartItemAsync(UpdateCartItemRequest request);
     }
 }

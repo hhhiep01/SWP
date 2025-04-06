@@ -1,5 +1,6 @@
 ﻿using Application.Interface;
 using Application.Request.Cart;
+using Application.Request.CartItem;
 using Application.Request.Product;
 using Application.Response;
 using Application.Response.Cart;
@@ -84,6 +85,62 @@ namespace Application.Services
             {
                 return new ApiResponse().SetBadRequest($"{ex.Message}");
             }
+        }
+        public async Task<ApiResponse> UpdateCartItemAsync(UpdateCartItemRequest request)
+        {
+            try
+            {
+                var response = new ApiResponse();
+                var claim = _claimService.GetUserClaim();
+                var user = await _unitOfWork.UserAccounts.GetAsync(x => x.Id == claim.Id, x => x.Include(x => x.Cart)
+                                                                                               .ThenInclude(x => x.CartItems));
+
+                if (user == null || user.Cart == null)
+                    return response.SetBadRequest("Cart not found");
+
+                var cartItem = await _unitOfWork.CartItems.GetAsync(ci => ci.ProductId == request.ProductId);
+                if (cartItem == null)
+                    return response.SetBadRequest("Product not found in cart");
+                if (request.Quantity <= 0)
+                    return response.SetBadRequest("Quantity must be greater than zero");
+                cartItem.Quantity = request.Quantity;
+                await _unitOfWork.SaveChangeAsync();
+
+                return response.SetOk("Cart item updated successfully");
+            }
+            catch (Exception ex)
+            {
+                return new ApiResponse().SetBadRequest($"{ex.Message}");
+            }
+
+        }
+
+
+        public async Task<ApiResponse> RemoveCartItemAsync(int productId)
+        {
+            try
+            {
+                var response = new ApiResponse();
+                var claim = _claimService.GetUserClaim();
+                var user = await _unitOfWork.UserAccounts.GetAsync(x => x.Id == claim.Id, x => x.Include(x => x.Cart)
+                                                                                               .ThenInclude(x => x.CartItems));
+
+                if (user == null || user.Cart == null)
+                    return response.SetBadRequest("Cart not found");
+
+                var cartItem = await _unitOfWork.CartItems.GetAsync(x => x.ProductId == productId);
+                if (cartItem == null)
+                    return response.SetBadRequest("Product not found in cart");
+                await _unitOfWork.CartItems.RemoveByIdAsync(cartItem.Id);
+                await _unitOfWork.SaveChangeAsync();
+
+                return response.SetOk("Cart item removed successfully");
+            }
+            catch (Exception ex)
+            {
+                return new ApiResponse().SetBadRequest($"{ex.Message}");
+            }
+
         }
 
     }

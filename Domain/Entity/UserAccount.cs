@@ -23,6 +23,7 @@ namespace Domain.Entity
         //
         public List<EmailVerification>? EmailVerifications { get; set; }
         public Cart? Cart { get; set; }
+        public List<Order>? Orders { get; set; }
 
 
     }

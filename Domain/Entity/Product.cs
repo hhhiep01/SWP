@@ -20,9 +20,10 @@ namespace Domain.Entity
 
         public string ImageURL { get; set; }
         //
-        public int CategoryId { get; set; }
-        public Category Category { get; set; }
-        public ICollection<CartItem> CartItems { get; set; }
+        public int? CategoryId { get; set; }
+        public Category? Category { get; set; }
+        public ICollection<CartItem>? CartItems { get; set; }
+        public ICollection<OrderDetail>? OrderDetails { get; set; }
     }
     public enum SkinType
     {

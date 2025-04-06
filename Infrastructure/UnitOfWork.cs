@@ -19,7 +19,9 @@ namespace Infrastructure
         public IProductRepository Products { get; }
         public ICategoryRepository Categories { get; }
         public ICartRepository Carts { get; }
-        public ICartItemRepository CartItems { get; set; }
+        public ICartItemRepository CartItems { get; }
+        public IOrderRepository Orders { get; }
+        public IOrderDetailRepository OrderDetails { get; }
 
         public UnitOfWork(AppDbContext context)
         {
@@ -30,6 +32,8 @@ namespace Infrastructure
             Categories = new CategoryRepository(context);
             Carts = new CartRepository(context);
             CartItems = new CartItemRepository(context);
+            Orders = new OrderRepository(context);
+            OrderDetails = new OrderDetailRepository(context);
 
 
         }

@@ -42,7 +42,7 @@ namespace Application.MyMapper
 
             //CartItem
             CreateMap<CartItem, CartItemResponse>()
-                .ForMember(dest => dest.ProductResponse, opt => opt.MapFrom(src => src.Product));
+                .ForMember(dest => dest.Products, opt => opt.MapFrom(src => src.Product));
 
 
 

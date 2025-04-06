@@ -5,14 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Response.CartItem
+namespace Application.Response.OrderDetail
 {
-    public class CartItemResponse
+    public class OrderDetailResponse
     {
         public int Id { get; set; }
         public int Quantity { get; set; }
         //
-        public ProductResponse Products { get; set; }
-
+        public ProductResponse Product { get; set; }
     }
 }

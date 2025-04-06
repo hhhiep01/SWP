@@ -20,6 +20,10 @@ namespace Infrastructure.Configuration
             .WithOne(c => c.UserAccount)
             .HasForeignKey<Cart>(c => c.UserId);
 
+            builder.HasMany(u => u.Orders)
+           .WithOne(c => c.UserAccount)
+           .HasForeignKey(c => c.UserAccountId);
+
             var user1 = CreatePasswordHash("User1");
             var user2 = CreatePasswordHash("User2");
             var employer = CreatePasswordHash("User3");
