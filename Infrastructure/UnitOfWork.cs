@@ -23,6 +23,8 @@ namespace Infrastructure
         public IOrderRepository Orders { get; }
         public IOrderDetailRepository OrderDetails { get; }
         public IPaymentRepository Payments { get; }
+        public ISkinTestAnswerRepository SkinTestAnswers { get; }
+        public ISkinTestQuestionRepository SkinTestQuestions { get; }
 
         public UnitOfWork(AppDbContext context)
         {
@@ -36,6 +38,8 @@ namespace Infrastructure
             Orders = new OrderRepository(context);
             OrderDetails = new OrderDetailRepository(context);
             Payments = new PaymentRepository(context);
+            SkinTestAnswers = new SkinTestAnswerRepository(context);
+            SkinTestQuestions = new SkinTestQuestionRepository(context);
 
         }
         public async Task SaveChangeAsync()

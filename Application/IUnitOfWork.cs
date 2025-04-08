@@ -18,6 +18,8 @@ namespace Application
         public IOrderRepository Orders { get; }
         public IOrderDetailRepository OrderDetails { get; }
         public IPaymentRepository Payments { get; }
+        public ISkinTestAnswerRepository SkinTestAnswers { get; }
+        public ISkinTestQuestionRepository SkinTestQuestions { get; }
 
         public Task SaveChangeAsync();
         Task<T> ExecuteScalarAsync<T>(string sql);

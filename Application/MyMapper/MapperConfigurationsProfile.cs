@@ -13,6 +13,8 @@ using Application.Response.Cart;
 using Application.Response.CartItem;
 using Application.Response.Order;
 using Application.Response.OrderDetail;
+using Application.Request.SkinTestQuestion;
+using Application.Response.SkinTestQuestion;
 
 
 namespace Application.MyMapper
@@ -54,7 +56,15 @@ namespace Application.MyMapper
             CreateMap<OrderDetail, OrderDetailResponse>()
                 .ForMember(dest => dest.Product, opt => opt.MapFrom(src => src.Product));
 
+            //SkinTestQuestion
+            CreateMap<CreateQuizQuestionRequest, SkinTestQuestion>();
+            CreateMap<SkinTestQuestion, QuizQuestionResponse>()
+                 .ForMember(dest => dest.Answers, opt => opt.MapFrom(src => src.SkinTestAnswers));
+            ;
 
+            //SkinTestQuestion
+            CreateMap<CreateQuizAnswerRequest, SkinTestAnswer>();
+            CreateMap<SkinTestAnswer, QuizAnswerResponse>();
 
         }
     }

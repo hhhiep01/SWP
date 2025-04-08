@@ -26,11 +26,11 @@ namespace Domain.Entity
         public ICollection<OrderDetail>? OrderDetails { get; set; }
     }
     public enum SkinType
-    {
-        Oily,
-        Dry,
-        Combination,
-        Sensitive,
-        Normal
+    {   
+        Normal = 1, // Da thường
+        Oily = 2,     // Da dầu
+        Dry = 3,      // Da khô
+        Sensitive = 4, // Da nhạy cảm
+          
     }
 }
