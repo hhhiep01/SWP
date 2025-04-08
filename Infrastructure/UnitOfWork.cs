@@ -22,6 +22,7 @@ namespace Infrastructure
         public ICartItemRepository CartItems { get; }
         public IOrderRepository Orders { get; }
         public IOrderDetailRepository OrderDetails { get; }
+        public IPaymentRepository Payments { get; }
 
         public UnitOfWork(AppDbContext context)
         {
@@ -34,7 +35,7 @@ namespace Infrastructure
             CartItems = new CartItemRepository(context);
             Orders = new OrderRepository(context);
             OrderDetails = new OrderDetailRepository(context);
-
+            Payments = new PaymentRepository(context);
 
         }
         public async Task SaveChangeAsync()

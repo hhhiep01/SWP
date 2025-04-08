@@ -11,6 +11,8 @@ using Application.Request.Product;
 using Application.Response.Product;
 using Application.Response.Cart;
 using Application.Response.CartItem;
+using Application.Response.Order;
+using Application.Response.OrderDetail;
 
 
 namespace Application.MyMapper
@@ -43,6 +45,14 @@ namespace Application.MyMapper
             //CartItem
             CreateMap<CartItem, CartItemResponse>()
                 .ForMember(dest => dest.Products, opt => opt.MapFrom(src => src.Product));
+
+            //Order
+            CreateMap<Order, OrderResponse>()
+                .ForMember(dest => dest.OrderDetails, opt => opt.MapFrom(src => src.OrderDetails));
+
+            //OrderDetail
+            CreateMap<OrderDetail, OrderDetailResponse>()
+                .ForMember(dest => dest.Product, opt => opt.MapFrom(src => src.Product));
 
 
 

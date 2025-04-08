@@ -9,21 +9,17 @@ namespace Domain.Entity
     public class Order : Base
     {
         public int Id { get; set; }
-        public double TotalPrice { get; set; }
+        public decimal TotalPrice { get; set; }
         public StatusOrder StatusOrder { get; set; }
-        public PaymentStatus PaymentStatus { get; set; }
+        public string ShippingName { get; set; }  
+        public string ShippingPhone { get; set; } 
+        public string ShippingAddress { get; set; }
         //
         public int UserAccountId { get; set; }
         public  UserAccount UserAccount { get; set; }
         public ICollection<OrderDetail> OrderDetails { get; set; }
+        public ICollection<Payment> Payments { get; set; }
 
-    }
-    public enum PaymentStatus
-    {
-        Unpaid,
-        Paid,
-        Refunded,
-        Failed
     }
     public enum StatusOrder
     {
@@ -35,6 +31,7 @@ namespace Domain.Entity
         Completed,
         Cancelled,
         Failed,
-        Refunded
+        Refunded,
+        AwaitingPayment
     } 
 }

@@ -17,6 +17,7 @@ namespace Application
         public ICartItemRepository CartItems { get;  }
         public IOrderRepository Orders { get; }
         public IOrderDetailRepository OrderDetails { get; }
+        public IPaymentRepository Payments { get; }
 
         public Task SaveChangeAsync();
         Task<T> ExecuteScalarAsync<T>(string sql);

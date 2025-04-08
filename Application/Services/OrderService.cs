@@ -1,6 +1,8 @@
 ﻿using Application.Interface;
+using Application.Request.Order;
 using Application.Response;
 using Application.Response.Category;
+using Application.Response.Order;
 using AutoMapper;
 using Domain.Entity;
 using Microsoft.EntityFrameworkCore;
@@ -19,7 +21,7 @@ namespace Application.Services
             _mapper = mapper;
             _claimService = claimService;
         }
-        public async Task<ApiResponse> CreateOrderAsync()
+        public async Task<ApiResponse> CreateOrderAsync(CreateOrderRequest createOrderRequest)
         {
             try
             {   
@@ -44,6 +46,9 @@ namespace Application.Services
                     UserAccountId = user.Id,
                     TotalPrice = total,
                     StatusOrder = StatusOrder.Pending,
+                    ShippingName = createOrderRequest.ShippingName, 
+                    ShippingPhone = createOrderRequest.ShippingPhone, 
+                    ShippingAddress = createOrderRequest.ShippingAddress, 
                     OrderDetails = cart.CartItems.Select(ci => new OrderDetail
                     {
                         ProductId = ci.ProductId,
@@ -71,9 +76,17 @@ namespace Application.Services
         {
             try
             {
-                var categories = await _unitOfWork.Categories.GetAllAsync(null);
-                var categoriesResponse = _mapper.Map<List<CategoryResponse>>(categories);
-                return new ApiResponse().SetOk(categoriesResponse);
+                ApiResponse response = new ApiResponse();
+                var claim = _claimService.GetUserClaim();
+                var user = await _unitOfWork.UserAccounts.GetAsync(x => x.Id == claim.Id, x => x.Include(x => x.Cart)
+                                                                                               .ThenInclude(x => x.CartItems));
+
+                if (user == null)
+                    return response.SetBadRequest("User not found");
+                var orders = await _unitOfWork.Orders.GetAllAsync(x=> x.UserAccountId == user.Id, x => x.Include(o => o.OrderDetails)  
+                                                                                                    .ThenInclude(od => od.Product));
+                var ordersResponse = _mapper.Map<List<OrderResponse>>(orders);
+                return new ApiResponse().SetOk(ordersResponse);
             }
             catch (Exception ex)
             {

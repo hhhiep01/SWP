@@ -1,4 +1,5 @@
-﻿using Domain.Entity;
+﻿using Application.Response.OrderDetail;
+using Domain.Entity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,5 +14,9 @@ namespace Application.Response.Order
         public double TotalPrice { get; set; }
         public StatusOrder StatusOrder { get; set; }
         public PaymentStatus PaymentStatus { get; set; }
+        public ICollection<OrderDetailResponse> OrderDetails { get; set; }
+        public string ShippingName { get; set; }
+        public string ShippingPhone { get; set; }
+        public string ShippingAddress { get; set; }
     }
 }

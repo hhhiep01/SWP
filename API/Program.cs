@@ -6,6 +6,7 @@ using Application.MyMapper;
 using Application.Repository;
 using Application.Services;
 using Application.Validation;
+using DocumentFormat.OpenXml.Office2016.Drawing.ChartDrawing;
 using Domain;
 using FluentValidation;
 using FluentValidation.AspNetCore;
@@ -98,6 +99,9 @@ builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IUserAccountService, UserAccountService>();
 builder.Services.AddScoped<ICartService, CartService>();
 builder.Services.AddScoped<IOrderService, OrderService>();
+builder.Services.AddScoped<IPaymentService, PaymentService>();
+builder.Services.AddScoped<IVnPayService, VnPayService>();
+
 
 
 builder.Services.AddFluentValidationAutoValidation().AddValidatorsFromAssemblyContaining<RegisterValidator>();
